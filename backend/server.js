@@ -11,8 +11,8 @@ app.get("/api/products", (req, res) => {
 });
 
 app.get("/api/products/:id", (req, res) => {
-  const product = products.fund((p) => p._id === req.params.id);
+  const product = products.find((p) => p._id === req.params.id);
   res.json(product);
 });
 
-app.listen(6000, console.log("Server Runnig on Port 5000"));
+app.listen(5000, console.log("Server Runnig on Port 5000"));
