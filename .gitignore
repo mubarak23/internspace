@@ -8,6 +8,7 @@ node_modules/
 
 # testing
 /coverage
+#mongodb://proshop:mubarak23@ds263048.mlab.com:63048/proshop
 
 # production
 /build
