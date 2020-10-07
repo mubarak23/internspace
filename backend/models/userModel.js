@@ -8,10 +8,10 @@ const userShema = mongoose.Schema({
   email: {
     type: String,
     required: true,
-    unique: ttrue,
+    unique: true,
   },
   password: {
-    type: Sttring,
+    type: String,
     required: true,
   },
   isAdmin: {

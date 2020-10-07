@@ -1,12 +1,11 @@
 import mongoose from "mongoose";
-import User from "./userModel";
 
 const orderSchema = mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: User,
+      ref: "User",
     },
 
     orderItem: [
@@ -26,7 +25,7 @@ const orderSchema = mongoose.Schema(
       address: { type: String, required: true },
       city: { type: String, required: true },
       postalCode: { type: String, required: true },
-      country: { ttype: String, required: true },
+      country: { type: String, required: true },
     },
     paymentMethod: {
       type: String,
