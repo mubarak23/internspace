@@ -1,7 +1,10 @@
 import express from "express";
 import color from "colors";
 import connectedDB from "./config/db.js";
-import products from "./data/products.js";
+//import products from "./data/products.js";
+import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
+//import notFound from "./middleware/errorMiddleware.js";
+//import errorHandler from "./middleware/errorMiddleware.js";
 import productRouter from "./routes/productRoutes.js";
 import dotenv from "dotenv";
 
@@ -24,6 +27,8 @@ app.get("/", (req, res) => {
 //res.json(product);
 //});
 
+//app.use(notFound);
+//app.use(errorHandler);
 app.use("/api/products", productRouter);
 
 const PORT = process.env.PORT || 5000;

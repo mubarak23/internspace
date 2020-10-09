@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 
-//mongodb://proshop:mubarak23@ds263048.mlab.com:63048/proshop
 //process.env.MONGO_URL
 const connectedDB = async () => {
   try {

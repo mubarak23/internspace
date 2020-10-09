@@ -19,12 +19,13 @@ router.get(
 //@access public
 router.get(
   "/:id",
-  asyncHandler(async (req, res) => {
+  asyncHandler(async (req, res, next) => {
     const product = await Product.findById(req.params.id);
     if (product) {
       res.json(product);
     } else {
-      res.status(400).json({ message: "Product Not Found" });
+      res.status(404);
+      throw new Error("Product not found");
     }
   })
 );
