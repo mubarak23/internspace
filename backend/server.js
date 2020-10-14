@@ -26,9 +26,8 @@ app.get("/", (req, res) => {
 //const product = products.find((p) => p._id === req.params.id);
 //res.json(product);
 //});
-
 //app.use(notFound);
-//app.use(errorHandler);
+app.use(errorHandler);
 app.use("/api/products", productRouter);
 
 const PORT = process.env.PORT || 5000;
