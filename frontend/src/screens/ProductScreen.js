@@ -2,16 +2,14 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Row, Col, Image, ListGroup, Card, Button } from "react-bootstrap";
-import axios from "axios";
+//import axios from "axios";
 import Rating from "../components/Rating";
-import products from "../products";
+//import products from "../products";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import { listProductDetails } from "../actions/productAction";
 
 const ProductScreen = ({ match }) => {
-  //const [product, setProduct] = useState([]);
-  const dispatch = useDispatch();
   //useEffect(() => {
   //const fetchProduct = async () => {
   //const { data } = await axios.get(`/api/products/${match.params.id}`);
@@ -22,6 +20,8 @@ const ProductScreen = ({ match }) => {
   //fetchProduct();
   //}, [match]);
   //const product = products.find((p) => p._id === match.params.id);
+
+  const dispatch = useDispatch();
   const productDetails = useSelector((state) => state.productDetail);
   const { loading, error, product } = productDetails;
   useEffect(() => {
