@@ -5,7 +5,9 @@ import connectedDB from "./config/db.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 //import notFound from "./middleware/errorMiddleware.js";
 //import errorHandler from "./middleware/errorMiddleware.js";
-import productRouter from "./routes/productRoutes.js";
+//import productRouter from "./routes/productRoutes.js";
+import productRoute from "./routes/productroute.js";
+import userRouter from "./routes/userRoutes.js";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -28,7 +30,8 @@ app.get("/", (req, res) => {
 //});
 //app.use(notFound);
 app.use(errorHandler);
-app.use("/api/products", productRouter);
+app.use("/api/products", productRoute);
+app.use("/api/user", userRouter);
 
 const PORT = process.env.PORT || 5000;
 
