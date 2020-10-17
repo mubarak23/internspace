@@ -31,7 +31,7 @@ app.get("/", (req, res) => {
 //app.use(notFound);
 app.use(errorHandler);
 app.use("/api/products", productRoute);
-app.use("/api/user", userRouter);
+app.use("/api/users", userRouter);
 
 const PORT = process.env.PORT || 5000;
 
