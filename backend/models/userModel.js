@@ -22,7 +22,7 @@ const userShema = mongoose.Schema({
   },
 });
 
-userShema.metthod.matchPassword = async function (enteredPassword) {
+userShema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
 
