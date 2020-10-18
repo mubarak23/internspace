@@ -1,6 +1,7 @@
 import express from "express";
 import color from "colors";
 import connectedDB from "./config/db.js";
+import bodyParser from "body-parser";
 //import products from "./data/products.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 //import notFound from "./middleware/errorMiddleware.js";
@@ -15,9 +16,15 @@ dotenv.config();
 connectedDB();
 
 const app = express();
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
   res.send("Api is runnung...");
+});
+
+app.post("/api", (req, res) => {
+  res.json(req.body);
 });
 
 //app.get("/api/products", (req, res) => {
