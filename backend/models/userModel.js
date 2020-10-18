@@ -26,7 +26,7 @@ userShema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
 userShema.pre("save", async function (next) {
-  if (!this.isModefied("password")) {
+  if (!this.isModified("password")) {
     nex();
   }
   const salt = await bcrypt.genSalt(10);
