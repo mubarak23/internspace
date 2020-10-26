@@ -27,7 +27,7 @@ const ProfileScreen = ({ location, history }) => {
     if (!userInfo) {
       history.push("/login");
     } else {
-      if (!user.name) {
+      if (!userInfo.name) {
         dispatch(getUserDetails("profile"));
       } else {
         setName(user.name);
@@ -41,7 +41,7 @@ const ProfileScreen = ({ location, history }) => {
     if (password !== confirmPassword) {
       setMessage("Password do not match");
     } else {
-      dispatch(updateUserProfile({ id: user._id, name, email, password }));
+      dispatch(updateUserProfile({ id: userInfo._id, name, email, password }));
     }
   };
 
