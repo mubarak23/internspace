@@ -9,6 +9,7 @@ import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 //import productRouter from "./routes/productRoutes.js";
 import productRoute from "./routes/productroute.js";
 import userRouter from "./routes/userRoutes.js";
+import orderRouter from "./routes/orderRoutes.js";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -39,6 +40,7 @@ app.post("/api", (req, res) => {
 app.use(errorHandler);
 app.use("/api/products", productRoute);
 app.use("/api/users", userRouter);
+app.use("/api/orders", orderRouter);
 
 const PORT = process.env.PORT || 5000;
 
