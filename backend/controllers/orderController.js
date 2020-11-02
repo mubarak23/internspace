@@ -35,3 +35,5 @@ const addOrderItems = asyncHandler(async (req, res) => {
     res.status(201).json(createOrder);
   }
 });
+
+export { addOrderItems };

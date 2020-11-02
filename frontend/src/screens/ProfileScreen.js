@@ -10,9 +10,9 @@ const ProfileScreen = ({ location, history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState(null);
 
-  const dispatch = useDispatch("");
+  const dispatch = useDispatch();
 
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
@@ -27,7 +27,7 @@ const ProfileScreen = ({ location, history }) => {
     if (!userInfo) {
       history.push("/login");
     } else {
-      if (!userInfo.name) {
+      if (!user.name) {
         dispatch(getUserDetails("profile"));
       } else {
         setName(user.name);
@@ -39,9 +39,9 @@ const ProfileScreen = ({ location, history }) => {
   const submitHandler = (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      setMessage("Password do not match");
+      setMessage("Passwords do not match");
     } else {
-      dispatch(updateUserProfile({ id: userInfo._id, name, email, password }));
+      dispatch(updateUserProfile({ id: user._id, name, email, password }));
     }
   };
 

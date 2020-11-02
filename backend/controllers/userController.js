@@ -26,13 +26,14 @@ const authUser = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Auth user & get token
-// @route   POST /api/users/login
-// @access  Public
+// @desc    Get user profile
+// @route   GET /api/users/profile
+// @access  Private
 const getUserProfile = asyncHandler(async (req, res) => {
-  const user = User.findById(req.user._id);
+  const user = await User.findById(req.user._id);
+  console.log(user._id);
   if (user) {
-    return json({
+    res.json({
       _id: user._id,
       name: user.name,
       email: user.email,
@@ -40,7 +41,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
     });
   } else {
     res.status(404);
-    throw new Error("User Not Found");
+    throw new Error("User not found");
   }
 });
 
