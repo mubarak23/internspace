@@ -4,7 +4,9 @@ import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import CheckoutSteps from "../components/CheckoutSteps";
-const PlaceOrderScreen = () => {
+import { createOrder } from "../actions/orderActions";
+const PlaceOrderScreen = ({ history }) => {
+  const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   //price
   const addDecimals = (num) => {
@@ -12,10 +14,10 @@ const PlaceOrderScreen = () => {
   };
 
   cart.itemsPrice = addDecimals(
-    cart.cartItems.reduce((acc) => acc + item.price * item.qty, 0)
+    cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
   );
 
-  cart.shippingPrice = addDecimals(caert.itemsPrice > 100 ? 0 : 100);
+  cart.shippingPrice = addDecimals(cart.itemsPrice > 100 ? 0 : 100);
   cart.taxPrice = addDecimals(Number((0.15 * cart.itemsPrice).toFixed(2)));
   cart.totalPrice = (
     Number(cart.itemsPrice) +
@@ -30,7 +32,7 @@ const PlaceOrderScreen = () => {
     if (success) {
       history.push(`order/${order._id}`);
     }
-  }, [history, success]);
+  }, [history, success, order]);
 
   const placeOrderHandler = () => {
     dispatch(
@@ -68,7 +70,7 @@ const PlaceOrderScreen = () => {
             </ListGroup.Item>
             <ListGroup.Item>
               <h2>Order Items</h2>
-              {cart.cartItems.lenght == 0 ? (
+              {cart.cartItems.lenght === 0 ? (
                 <Message>Your Cart is Empty</Message>
               ) : (
                 <ListGroup variant="flush">

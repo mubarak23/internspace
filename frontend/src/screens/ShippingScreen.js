@@ -33,6 +33,7 @@ const ShippingScreen = ({ history }) => {
             type="text"
             placeholder="Address"
             value={address}
+            required
             onChange={(e) => setAddress(e.target.value)}
           ></Form.Control>
         </Form.Group>
@@ -42,6 +43,7 @@ const ShippingScreen = ({ history }) => {
             type="text"
             placeholder="City"
             value={city}
+            required
             onChange={(e) => setCity(e.target.value)}
           ></Form.Control>
         </Form.Group>
@@ -51,6 +53,7 @@ const ShippingScreen = ({ history }) => {
             type="text"
             placeholder="postalCode"
             value={postalCode}
+            required
             onChange={(e) => setPostalCode(e.target.value)}
           ></Form.Control>
         </Form.Group>
@@ -60,6 +63,7 @@ const ShippingScreen = ({ history }) => {
             type="text"
             placeholder="country"
             value={country}
+            required
             onChange={(e) => setCountry(e.target.value)}
           ></Form.Control>
         </Form.Group>
