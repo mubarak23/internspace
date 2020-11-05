@@ -1,9 +1,9 @@
-import e from "express";
+//import e from "express";
 import asyncHandler from "express-async-handler";
 import Order from "../models/orderModel.js";
 
 // @desc    create new Order
-// @route   GET /api/orders
+// @route   POST /api/orders
 // @access  Private
 const addOrderItems = asyncHandler(async (req, res) => {
   const {
@@ -32,7 +32,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
       totalPrice,
     });
 
-    const createOrder = await Order.save();
+    const createOrder = await order.save();
     res.status(201).json(createOrder);
   }
 });
