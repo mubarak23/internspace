@@ -25,8 +25,10 @@ const OrderScreen = ({ match }) => {
   }
 
   useEffect(() => {
-    dispatch(getOrderDetails(orderId));
-  }, [dispatch, orderId]);
+    if (!order || order._id !== orderId) {
+      dispatch(getOrderDetails(orderId));
+    }
+  }, [dispatch, order, orderId]);
 
   return loading ? (
     <Loader />
@@ -34,7 +36,7 @@ const OrderScreen = ({ match }) => {
     <Message variant="danger">{error}</Message>
   ) : (
     <>
-      <h2>Order Details</h2>
+      <h2>Order {order._id}</h2>
       <Row>
         <Col md={8}>
           <ListGroup variant="flush">
