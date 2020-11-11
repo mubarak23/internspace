@@ -4,7 +4,8 @@ import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import { getOrderDetails } from "../actions/orderActions";
+import { getOrderDetails, payOrder } from "../actions/orderActions";
+import { ORDER_PAY_RESET } from "../constants/orderConstants";
 
 const OrderScreen = ({ match }) => {
   const orderId = match.params.id;
@@ -12,6 +13,9 @@ const OrderScreen = ({ match }) => {
 
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
+
+  const orderPay = useSelector((state) => state.orderPay);
+  const { loading: loadingPay, success: successPay } = orderPay;
 
   if (!loading) {
     //   Calculate prices
@@ -25,10 +29,22 @@ const OrderScreen = ({ match }) => {
   }
 
   useEffect(() => {
-    if (!order || order._id !== orderId) {
+    if (!order || order._id !== orderId || successPay) {
+      dispatch({ type: ORDER_PAY_RESET });
       dispatch(getOrderDetails(orderId));
     }
-  }, [dispatch, order, orderId]);
+  }, [dispatch, order, orderId, successPay]);
+
+  const successPaymentHandler = () => {
+    const paymeentResult = {
+      id: "TXN58734600GHR678",
+      status: "CAPTURED",
+      update_time: new Date().getUTCDate(),
+      email_address: "mubarak@webmallng.com",
+    };
+    console.log(paymeentResult);
+    dispatch(payOrder(orderId, paymeentResult));
+  };
 
   return loading ? (
     <Loader />
@@ -138,6 +154,23 @@ const OrderScreen = ({ match }) => {
                   <Col>${order.totalPrice}</Col>
                 </Row>
               </ListGroup.Item>
+              {order.isPaid ? (
+                <ListGroup.Item>
+                  <Button variant="primary" className="btn btn-primary">
+                    Paid
+                  </Button>
+                </ListGroup.Item>
+              ) : (
+                <ListGroup.Item>
+                  <Button
+                    onClick={successPaymentHandler}
+                    variant="primary"
+                    className="btn btn-primary"
+                  >
+                    Pay Now
+                  </Button>
+                </ListGroup.Item>
+              )}
             </ListGroup>
           </Card>
         </Col>
