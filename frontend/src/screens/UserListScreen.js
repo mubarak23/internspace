@@ -6,18 +6,25 @@ import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { usersList } from "../actions/userActions";
 
-const UserListScreen = () => {
+const UserListScreen = ({ history }) => {
   const dispatch = useDispatch();
   const userList = useSelector((state) => state.userList);
   const { loading, error, users } = userList;
 
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
   useEffect(() => {}, [dispatch]);
 
   useEffect(() => {
-    console.log("reach this point");
-    dispatch(usersList());
-    console.log("dispatch run");
-  }, [dispatch]);
+    if (userInfo && userInfo.isAdmin) {
+      console.log("reach this point");
+      dispatch(usersList());
+      console.log("dispatch run");
+    } else {
+      history.push("/login");
+    }
+  }, [dispatch, history, userInfo]);
 
   const deleteHandlerSubmit = (id) => {
     console.log(id);
