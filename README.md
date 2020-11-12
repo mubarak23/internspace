@@ -1,17 +1,18 @@
 <h2>ProShop</h2>
 <p>An ecommerce platform build with the intention of sharping my javaScript onn the MERN stack,</p>
 Features
-1.View All Product
+
+1. View All Product
 2. View Single Product Details
 3. Add Product to Cart
 4. Full Cart funtionality
 5. User Profile
 6. Admin Profile
-6. CRUD Operation on Product For Admin Management
-7. CRUD operation On User
-8. Search Functionality
-9. Add Review for product
-10. Admin Order Details
+7. CRUD Operation on Product For Admin Management
+8. CRUD operation On User
+9. Search Functionality
+10. Add Review for product
+11. Admin Order Details
 
 Back End Enpoint
 
