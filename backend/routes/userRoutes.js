@@ -8,7 +8,8 @@ import {
 } from "../controllers/userController.js";
 import { protect, admin } from "../middleware/authMiddleware.js";
 const router = express.Router();
-router.post("/", registerUser).get(protect, admin, getUsers);
+router.post("/", registerUser);
+router.get("/", protect, admin, getUsers);
 router.post("/login", authUser);
 router
   .route("/profile")

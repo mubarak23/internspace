@@ -31,8 +31,10 @@ const protect = asyncHandler(async (req, res, next) => {
 
 const admin = (req, res, next) => {
   if (req.user && req.user.isAdmin) {
-    nnext();
+    next();
   } else {
+    //res.status(401);
+    //throw new Error("Nott Authorized as Adminn");
     res.status(401);
     throw new Error("Nott Authorized as Adminn");
   }
