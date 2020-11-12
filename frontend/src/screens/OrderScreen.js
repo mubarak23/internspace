@@ -37,7 +37,7 @@ const OrderScreen = ({ match }) => {
 
   const successPaymentHandler = () => {
     const paymeentResult = {
-      id: "TXN58734600GHR678",
+      id: "TXN587346563DG4568",
       status: "CAPTURED",
       update_time: new Date().getUTCDate(),
       email_address: "mubarak@webmallng.com",
