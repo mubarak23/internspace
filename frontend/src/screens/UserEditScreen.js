@@ -1,0 +1,67 @@
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { Form, Button } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import Message from "../components/Message";
+import Loader from "../components/Loader";
+import FormContainer from "../components/FormContainer";
+import { getUserDetails } from "../actions/userActions";
+
+const UserEditScreen = ({ match, history }) => {
+  const userId = match.param.id;
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [isAdmin, setsIAdmin] = useState(false);
+
+  const dispatch = useDispatch();
+  const userDetails = useSelector((state) => state.userDetails);
+  const { loading, error, user } = userDetails;
+  return (
+    <>
+      <Link to="/admin/userlist">Go Back</Link>
+      <FormContainer>
+        <h2>Edit User</h2>
+        {loading ? (
+          <Loader />
+        ) : error ? (
+          <Message variant="danger">{error}</Message>
+        ) : (
+          <form>
+            <Form.Group controlId="name">
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                type="text"
+                value={name}
+                placeholder="Enter Name"
+                onChange={(e) => setName(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
+            <Form.Group controlId="email">
+              <Form.Label>Email Address</Form.Label>
+              <Form.Control
+                type="email"
+                value={email}
+                placeholder="Enter Email Address"
+                onChange={(e) => setEmail(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
+            <Form.Group controlId="isAdmin">
+              <Form.Label>isAdmin</Form.Label>
+              <Form.Control
+                type="checkbox"
+                label="is Admin"
+                placeholder="Enter Name"
+                onChange={(e) => setIsAdmin(e.target.checked)}
+              ></Form.Control>
+            </Form.Group>
+            <Button type="submit" variant="primary">
+              Update User
+            </Button>
+          </form>
+        )}
+      </FormContainer>
+    </>
+  );
+};
+
+export default UserEditScreen;
