@@ -19,7 +19,18 @@ const UserEditScreen = ({ match, history }) => {
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
 
+  const userUpdate = useSelector((state) => state.userUpdate);
+  const {
+    loading: loadingUpdate,
+    error: errorUpdate,
+    success: successUpdate,
+  } = userUpdate;
+
   useEffect(() => {
+    if (successUpdate) {
+      dispatch({ type: USER_UPDATE_RESET });
+      history.push("/admin/userlist");
+    }
     if (!user.name || user._id !== userId) {
       dispatch(getUserDetails(userId));
     } else {
@@ -27,17 +38,20 @@ const UserEditScreen = ({ match, history }) => {
       setEmail(user.email);
       setIsAdmin(user.isAdmin);
     }
-  }, [dispatch, userId, user]);
+  }, [dispatch, history, userId, user, successUpdate]);
 
   const submitHandle = (e) => {
     e.preventDefault();
     console.log("submit eidt user");
+    dispatch(updateUser({ _id: userId, name, email, isAdmin }));
   };
   return (
     <>
       <Link to="/admin/userlist">Go Back</Link>
       <FormContainer>
         <h2>Edit User</h2>
+        {loadingUpdate && <Loader />}
+        {errorUpdate && <Message variant="danger">{errorUpdate}</Message>}
         {loading ? (
           <Loader />
         ) : error ? (
