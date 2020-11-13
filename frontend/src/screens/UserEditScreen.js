@@ -8,14 +8,29 @@ import FormContainer from "../components/FormContainer";
 import { getUserDetails } from "../actions/userActions";
 
 const UserEditScreen = ({ match, history }) => {
-  const userId = match.param.id;
+  const userId = match.params.id;
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [isAdmin, setsIAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const dispatch = useDispatch();
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
+
+  useEffect(() => {
+    if (!user.name || user._id !== userId) {
+      dispatch(getUserDetails(userId));
+    } else {
+      setName(user.name);
+      setEmail(user.email);
+      setIsAdmin(user.isAdmin);
+    }
+  }, [dispatch, userId, user]);
+
+  const submitHandle = (e) => {
+    e.preventDefault();
+    console.log("submit eidt user");
+  };
   return (
     <>
       <Link to="/admin/userlist">Go Back</Link>
@@ -26,7 +41,7 @@ const UserEditScreen = ({ match, history }) => {
         ) : error ? (
           <Message variant="danger">{error}</Message>
         ) : (
-          <form>
+          <form onSubmit={submitHandle}>
             <Form.Group controlId="name">
               <Form.Label>Name</Form.Label>
               <Form.Control
@@ -47,12 +62,12 @@ const UserEditScreen = ({ match, history }) => {
             </Form.Group>
             <Form.Group controlId="isAdmin">
               <Form.Label>isAdmin</Form.Label>
-              <Form.Control
+              <Form.Check
                 type="checkbox"
                 label="is Admin"
                 placeholder="Enter Name"
                 onChange={(e) => setIsAdmin(e.target.checked)}
-              ></Form.Control>
+              ></Form.Check>
             </Form.Group>
             <Button type="submit" variant="primary">
               Update User
