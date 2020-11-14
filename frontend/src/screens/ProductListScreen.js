@@ -4,7 +4,7 @@ import { Table, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
-import { listProducts } from "../actions/productActions";
+import { listProducts } from "../actions/productAction";
 
 const ProductListScreen = ({ history, match }) => {
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ const ProductListScreen = ({ history, match }) => {
   const deleteHandler = (e) => {
     e.preventDefault();
   };
-  const createProductHandle = () => {
+  const createProductHandler = () => {
     console.log("create product");
   };
   return (
@@ -67,13 +67,6 @@ const ProductListScreen = ({ history, match }) => {
                 <td>{product.price}</td>
                 <td>{product.brand}</td>
                 <td>{product.catetory}</td>
-                <td>
-                  {user.isAdmin ? (
-                    <i className="fas fa-check" style={{ color: "green" }}></i>
-                  ) : (
-                    <i className="fas fa-times" style={{ color: "red" }}></i>
-                  )}
-                </td>
                 <td>
                   <LinkContainer to={`/admin/product/${product._id}/edit`}>
                     <Button variant="light" className="btn-sm">
