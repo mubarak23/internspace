@@ -52,7 +52,7 @@ const createProduct = asyncHandler(async (req, res) => {
     category: "Sample category",
     countInStock: 0,
     numReviews: 0,
-    descriptio: "Sample Description",
+    description: "Sample Description",
   });
   const createProduct = await product.save();
   res.json(createProduct);
@@ -92,4 +92,10 @@ const updateProduct = asyncHandler(async (req, res) => {
   }
 });
 
-export { getProducts, getProductById, deleteProduct };
+export {
+  getProducts,
+  getProductById,
+  deleteProduct,
+  createProduct,
+  updateProduct,
+};
