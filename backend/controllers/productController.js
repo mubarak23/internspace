@@ -72,7 +72,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     category,
     countInStock,
     numReviews,
-    descriptio,
+    description,
   } = req.body;
   const product = await Product.findById(req.params.id);
   if (product) {

@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import FormContainer from "../components/FormContainer";
-import { listProductDetails } from "../actions/productAction";
+import { listProductDetails, updateProduct } from "../actions/productAction";
+import { PRODUCT_UPDATE_RESET } from "../constants/productConstants";
 //import { USER_UPDATE_RESET } from "../constants/userConstants";
 //import { updateUser } from "../actions/userActions";
 
@@ -23,18 +24,18 @@ const ProductEditScreen = ({ match, history }) => {
   const productDetail = useSelector((state) => state.productDetail);
   const { loading, error, product } = productDetail;
 
-  //const userUpdate = useSelector((state) => state.userUpdate);
-  //const {
-  //loading: loadingUpdate,
-  //error: errorUpdate,
-  //success: successUpdate,
-  //} = userUpdate;
+  const productUpdate = useSelector((state) => state.productUpdate);
+  const {
+    loading: loadingUpdate,
+    error: errorUpdate,
+    success: successUpdate,
+  } = productUpdate;
 
   useEffect(() => {
-    //if (successUpdate) {
-    //dispatch({ type: USER_UPDATE_RESET });
-    //history.push("/admin/userlist");
-    //}
+    if (successUpdate) {
+      dispatch({ type: PRODUCT_UPDATE_RESET });
+      history.push("/admin/productlist");
+    }
     if (!product.name || product._id !== productId) {
       dispatch(listProductDetails(productId));
     } else {
@@ -46,19 +47,31 @@ const ProductEditScreen = ({ match, history }) => {
       setImage(product.image);
       setCategory(product.category);
     }
-  }, [dispatch, history, productId, product]);
+  }, [dispatch, history, productId, product, successUpdate]);
 
   const submitHandle = (e) => {
     e.preventDefault();
-    console.log("submit eidt user");
-    //dispatch(updateUser({ _id: userId, name, email, isAdmin }));
+    console.log("submit eidt product");
+    dispatch(
+      updateProduct({
+        _id: productId,
+        name,
+        price,
+        image,
+        brand,
+        category,
+        description,
+        countInStock,
+      })
+    );
   };
   return (
     <>
       <Link to="/admin/productlist">Go Back</Link>
       <FormContainer>
         <h2>Edit Product</h2>
-
+        {loadingUpdate && <Loader />}
+        {errorUpdate && <Message variant="danger">{errorUpdate}</Message>}
         {loading ? (
           <Loader />
         ) : error ? (
