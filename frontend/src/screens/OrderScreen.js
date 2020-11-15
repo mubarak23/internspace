@@ -114,7 +114,7 @@ const OrderScreen = ({ match }) => {
                           </Link>
                         </Col>
                         <Col md={4}>
-                          {item.qty} x ${item.price} = ${item.qty * item.price}
+                          {item.qty} x N{item.price} = N{item.qty * item.price}
                         </Col>
                       </Row>
                     </ListGroup.Item>

@@ -92,7 +92,7 @@ const CartScreen = ({ match, location, history }) => {
               <h2>
                 SubTotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)})
               </h2>
-              $
+              N
               {cartItems
                 .reduce((acc, item) => acc + item.qty * item.price, 0)
                 .toFixed(2)}
