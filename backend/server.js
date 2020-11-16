@@ -1,4 +1,5 @@
 import express from "express";
+import path from "path";
 import color from "colors";
 import connectedDB from "./config/db.js";
 import bodyParser from "body-parser";
@@ -10,6 +11,7 @@ import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import productRoute from "./routes/productroute.js";
 import userRouter from "./routes/userRoutes.js";
 import orderRouter from "./routes/orderRoutes.js";
+import uploadRouter from "./routes/uploadRoutes.js";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -41,6 +43,11 @@ app.use(errorHandler);
 app.use("/api/products", productRoute);
 app.use("/api/users", userRouter);
 app.use("/api/orders", orderRouter);
+app.use("/api/upload", uploadRouter);
+
+//allow us t orender folder in node with module syntex
+const __dirname = path.resolve();
+app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
 const PORT = process.env.PORT || 5000;
 
