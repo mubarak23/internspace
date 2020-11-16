@@ -48,6 +48,8 @@ const OrderListScreen = ({ history }) => {
           <thead>
             <tr>
               <th>ID</th>
+              <th>USER</th>
+              <th>DATE</th>
               <th>TOTAL PRICE</th>
               <th>PAID</th>
               <th>DELIVERED</th>
@@ -58,10 +60,12 @@ const OrderListScreen = ({ history }) => {
             {orders.map((order) => (
               <tr key={order._id}>
                 <td>{order._id}</td>
+                <td>{order.user && order.user.name}</td>
+                <td>{order.createdAt.substring(0, 10)}</td>
                 <td>{order.totalPrice}</td>
                 <td>
                   {order.isPaid ? (
-                    <i className="fas fa-check" style={{ color: "green" }}></i>
+                    order.paidAt.substring(0, 10)
                   ) : (
                     <i className="fas fa-times" style={{ color: "red" }}></i>
                   )}
@@ -74,18 +78,11 @@ const OrderListScreen = ({ history }) => {
                   )}
                 </td>
                 <td>
-                  <LinkContainer to={`admin/order/${order._id}`}>
+                  <LinkContainer to={`/orders/${order._id}`}>
                     <Button variant="light" className="btn-sm">
-                      <i className="fas fa-edit"></i>
+                      Details
                     </Button>
                   </LinkContainer>
-                  <Button
-                    variant="danger"
-                    className="btn-sm"
-                    onClick={() => deleteHandlerSubmit(order._id)}
-                  >
-                    <i className="fas fa-trash"></i>
-                  </Button>
                 </td>
               </tr>
             ))}
