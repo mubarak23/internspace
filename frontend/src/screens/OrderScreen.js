@@ -61,7 +61,8 @@ const OrderScreen = ({ match }) => {
   };
 
   const deliverHandler = () => {
-    dispatch(deliverOrder);
+    console.log("deliver order here");
+    dispatch(deliverOrder(order));
   };
 
   return loading ? (
