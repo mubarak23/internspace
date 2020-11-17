@@ -3,6 +3,7 @@ import path from "path";
 import color from "colors";
 import connectedDB from "./config/db.js";
 import bodyParser from "body-parser";
+import morgan from "morgan";
 //import products from "./data/products.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 //import notFound from "./middleware/errorMiddleware.js";
@@ -19,6 +20,11 @@ dotenv.config();
 connectedDB();
 
 const app = express();
+
+if (process.env.NODE_ENV === "dev") {
+  app.use(morgan("dev"));
+}
+
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true }));
 
