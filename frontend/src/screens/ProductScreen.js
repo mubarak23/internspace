@@ -47,7 +47,8 @@ const ProductScreen = ({ history, match }) => {
   const productReviewCreate = useSelector((state) => state.productReviewCreate);
   const {
     success: successProductreview,
-    error: errorProductReviw,
+    error: errorProductReview,
+    loading: loadingProductReview,
   } = productReviewCreate;
 
   useEffect(() => {
@@ -64,7 +65,7 @@ const ProductScreen = ({ history, match }) => {
     history.push(`/cart/${match.params.id}?qty=${qty}`);
   };
 
-  const submitHandlerr = (e) => {
+  const submitHandler = (e) => {
     e.preventDefault();
     dispatch(
       createProductReview(match.params.id, {
@@ -176,7 +177,7 @@ const ProductScreen = ({ history, match }) => {
                 ))}
                 <ListGroup.Item>
                   <h2>Write a Customer Review</h2>
-                  {successProductReview && (
+                  {successProductreview && (
                     <Message variant="success">
                       Review submitted successfully
                     </Message>

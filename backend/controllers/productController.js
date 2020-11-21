@@ -19,8 +19,7 @@ const getProductById = asyncHandler(async (req, res) => {
   if (product) {
     res.json(product);
   } else {
-    res.status(404);
-    throw new Error("Product not found");
+    res.status(404).json({ message: "Product Remove" });
   }
 });
 
@@ -97,7 +96,7 @@ const updateProduct = asyncHandler(async (req, res) => {
 // @access  Private
 
 const createProductReview = asyncHandler(async (req, res) => {
-  const { review, comment } = req.body;
+  const { rating, comment } = req.body;
   const product = await Product.findById(req.params.id);
   if (product) {
     const alreadyReview = product.reviews.find(
@@ -114,12 +113,12 @@ const createProductReview = asyncHandler(async (req, res) => {
       comment,
       user: req.user._id,
     };
-
+    console.log(review);
     product.reviews.push(review);
     product.numReviews = product.reviews.length;
 
     product.rating =
-      product.reviews.reducer((acc, item) => item.rating + acc, 0) /
+      product.reviews.reduce((acc, item) => item.rating + acc, 0) /
       product.reviews.length;
     await product.save();
     res.status(201).json({ message: "Review Added" });
