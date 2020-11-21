@@ -15,3 +15,11 @@ dispatch({
       ? error.response.data.message
       : error.response.message,
 });
+
+dispatch({
+  type: ORDER_LIST_MY_FAIL,
+  payload:
+    error.response && error.response.data.message
+      ? error.response.data.message
+      : error.response.message,
+});

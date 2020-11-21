@@ -53,6 +53,13 @@ export const listProductDetails = (id) => async (dispatch) => {
     });
   } catch (error) {
     console.log(error);
+    dispatch({
+      type: PRODUCT_DETAILS_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.response.message,
+    });
   }
 };
 
