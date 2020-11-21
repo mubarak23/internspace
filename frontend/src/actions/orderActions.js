@@ -142,6 +142,13 @@ export const listMyOrders = () => async (dispatch, getState) => {
     });
   } catch (error) {
     console.log(error);
+    dispatch({
+      type: ORDER_LIST_MY_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.response.message,
+    });
   }
 };
 
