@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Row, Col } from "react-bootstrap";
+import Meta from "../components/Meta";
 //import axios from "axios";
 import { Link } from "react-router-dom";
 import { listProducts } from "../actions/productAction.js";
@@ -32,6 +33,7 @@ const HomeScreen = ({ match }) => {
 
   return (
     <>
+      <Meta />
       {!keyword ? (
         <ProductCarousel />
       ) : (
