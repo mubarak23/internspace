@@ -6,9 +6,7 @@ import Message from "../components/Message";
 import Loader from "../components/Loader";
 import Paginate from "../components/Paginate.js";
 import {
-  listProductDetails,
   listProducts,
-  deleteProduct,
   deletesProduct,
   createProduct,
 } from "../actions/productAction";

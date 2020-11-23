@@ -29,13 +29,6 @@ const OrderListScreen = ({ history }) => {
     }
   }, [dispatch, history, userInfo]);
 
-  const deleteHandlerSubmit = (id) => {
-    console.log(id);
-    if (window.confirm("Are You Sure")) {
-      //dispatch(deleteUser(id));
-    }
-  };
-
   return (
     <>
       <h2>Order List</h2>
