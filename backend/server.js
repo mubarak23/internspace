@@ -14,6 +14,7 @@ import userRouter from "./routes/userRoutes.js";
 import orderRouter from "./routes/orderRoutes.js";
 import uploadRouter from "./routes/uploadRoutes.js";
 import dotenv from "dotenv";
+import { ppid } from "process";
 
 dotenv.config();
 
@@ -30,10 +31,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
   res.send("Api is runnung...");
-});
-
-app.post("/api", (req, res) => {
-  res.json(req.body);
 });
 
 //app.get("/api/products", (req, res) => {
@@ -54,6 +51,17 @@ app.use("/api/upload", uploadRouter);
 //allow us t orender folder in node with module syntex
 const __dirname = path.resolve();
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "frontend/build")));
+  app.get("*", (req, res) =>
+    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"))
+  );
+} else {
+  app.get("/", (req, res) => {
+    res.send("Api is runnung...");
+  });
+}
 
 const PORT = process.env.PORT || 5000;
 

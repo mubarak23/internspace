@@ -9,9 +9,10 @@ node_modules/
 # testing
 /coverage
 #mongodb://proshop:mubarak23@ds263048.mlab.com:63048/proshop
+https://arewastore.herokuapp.com/ | https://git.heroku.com/arewastore.git
 
 # production
-/build
+/frontend/build
 
 # misc
 .DS_Store
