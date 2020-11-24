@@ -24,6 +24,7 @@ import {
   USER_UPDATE_SUCCESS,
   USER_UPDATE_FAIL,
   USER_UPDATE_RESET,
+  USER_UPDATE_PROFILE_RESET,
 } from "../constants/userConstants.js";
 
 export const userRegisterReducer = (state = {}, action) => {
@@ -75,6 +76,7 @@ export const userUpdateProfileReducer = (state = { user: {} }, action) => {
       return { loading: true };
     case USER_UPDATE_PROFILE_SUCCESS:
       return { loading: false, success: true, userInfo: action.payload };
+
     case USER_UPDATE_PROFILE_FAIL:
       return { loading: false, error: action.payload };
     default:
