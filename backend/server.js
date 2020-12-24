@@ -9,9 +9,7 @@ import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 //import notFound from "./middleware/errorMiddleware.js";
 //import errorHandler from "./middleware/errorMiddleware.js";
 //import productRouter from "./routes/productRoutes.js";
-import productRoute from "./routes/productroute.js";
 import userRouter from "./routes/userRoutes.js";
-import orderRouter from "./routes/orderRoutes.js";
 import uploadRouter from "./routes/uploadRoutes.js";
 import dotenv from "dotenv";
 //import { ppid } from "process";
@@ -39,9 +37,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //});
 //app.use(notFound);
 app.use(errorHandler);
-app.use("/api/products", productRoute);
+//app.use("/api/products", productRoute);
 app.use("/api/users", userRouter);
-app.use("/api/orders", orderRouter);
+//app.use("/api/orders", orderRouter);
 app.use("/api/upload", uploadRouter);
 
 //allow us t orender folder in node with module syntex
