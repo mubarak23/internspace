@@ -1,29 +1,30 @@
-<h2>ProShop</h2>
-<p>An ecommerce platform build with the intention of sharping my javaScript onn the MERN stack,</p>
-Features
+InternSpace Feature Set Review
+Entities
+Internship
+Interns
+Admin
+AppliedIntern
 
-1. View All Product
-2. View Single Product Details
-3. Add Product to Cart
-4. Full Cart funtionality
-5. User Profile
-6. Admin Profile
-7. CRUD Operation on Product For Admin Management
-8. CRUD operation On User
-9. Search Functionality
-10. Add Review for product
-11. Admin Order Details
+Internship has the following data field id, description, responsibility, requirement, company duration, title, (product)
 
-Back End Enpoint
+Interns are user on the platform with the following field id name, email, phone_number, address, cv_upload,username and password
+AppliedIntern will have the following field id, internship_id, intern_id, applied date, status, title, (order)
 
-1.  Fetch all products GET /api/products
-2.  Fetch single product GET /api/products/:id
-3.  Auth user & get token POST /api/users/login
-4.  Get user profile GET /api/users/profile
-5.  Register a new user POST /api/users
-6.  Update User Profile PUT /api/users/profile
-7.  Get all user GET /api/users
-8.  create new Order POST /api/orders
-9.  GET Order By Id GET /api/orders/:id
-10. Update order to paid GET /api/orders/:id/pay
-11. Get logged in user orders GET /api/orders/myorders
+Admin are user field id, email, password, isAdmin, isCompany
+
+Relationship
+Intern can applied to many Internship i.e one to many relationship
+Admin can create Many Internships
+AppliedIntern contain the details details of the intern that applied for a particular internship
+
+Feature
+Intern can create account
+Interns can login to his account
+Intern can apply for an internship
+Intern can view all the internship he applied
+Intern can update his profile, education, experience and cv upload
+Admin can create an internship
+Admin can login to the main dashboard
+Admin can view all internship
+Admin can view all intern and view single intern details
+Admin can view all applied internship and their details
