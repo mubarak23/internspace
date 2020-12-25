@@ -1,24 +1,11 @@
 import asyncHandler from "express-async-handler";
-const { Validator } = require("node-input-validator");
-import Internship from "../models/InternshipModel";
+
+import Internship from "../models/InternshipModel.js";
 
 // @desc    add internship opening
 // @route   POST /api/users/login
 // @access  private -- protect and iscompany middleware
 const addInternship = asyncHandler(async (req, res) => {
-  const v = new Validator(ctx.request.body, {
-    title: "required|minLength:5",
-    description: "required",
-    requirement: "required",
-    responsibilities: "required",
-    duration: "required",
-  });
-  const matched = await v.check();
-  if (!matched) {
-    ctx.status = 422;
-    ctx.body = v.errors;
-    return;
-  }
   const internship = await Internship.create({
     admin: req.admin._id,
     title,

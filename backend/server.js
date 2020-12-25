@@ -6,12 +6,12 @@ import bodyParser from "body-parser";
 import morgan from "morgan";
 //import products from "./data/products.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
-//import notFound from "./middleware/errorMiddleware.js";
-//import errorHandler from "./middleware/errorMiddleware.js";
-//import productRouter from "./routes/productRoutes.js";
-import userRouter from "./routes/userRoutes.js";
+import adminRouter from "./routes/adminRoute.js";
+import internRouter from "./routes/internRoutes.js";
+import intternshipRouter from "./routes/internshiproute.js";
 import uploadRouter from "./routes/uploadRoutes.js";
 import dotenv from "dotenv";
+
 //import { ppid } from "process";
 
 dotenv.config();
@@ -38,7 +38,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //app.use(notFound);
 app.use(errorHandler);
 //app.use("/api/products", productRoute);
-app.use("/api/users", userRouter);
+app.use("/api/admin", adminRouter);
+app.use("/api/interns", internRouter);
+app.use("/api/internship", intternshipRouter);
 //app.use("/api/orders", orderRouter);
 app.use("/api/upload", uploadRouter);
 

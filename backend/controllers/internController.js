@@ -1,6 +1,8 @@
 import asyncHandler from "express-async-handler";
 import Intern from "../models/internModel.js";
+import Internship from "../models/InternshipModel.js";
 import generateToken from "../utils/generateToken.js";
+import { Validator } from "node-input-validator";
 
 // @desc    Auth intern & get token
 // @route   POST /api/users/login
@@ -9,15 +11,14 @@ import generateToken from "../utils/generateToken.js";
 const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
-  const user = await User.findOne({ email });
+  const intern = await Internship.findOne({ email });
 
-  if (user && (await user.matchPassword(password))) {
+  if (intern && (await intern.matchPassword(password))) {
     res.json({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      isAdmin: user.isAdmin,
-      token: generateToken(user._id),
+      _id: intern._id,
+      email: intern.email,
+      name: intern.name,
+      token: generateToken(intern._id),
     });
   } else {
     res.status(401);
