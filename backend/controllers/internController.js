@@ -11,7 +11,7 @@ import { Validator } from "node-input-validator";
 const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
-  const intern = await Internship.findOne({ email });
+  const intern = await Intern.findOne({ email });
 
   if (intern && (await intern.matchPassword(password))) {
     res.json({

@@ -6,6 +6,13 @@ import Internship from "../models/InternshipModel.js";
 // @route   POST /api/users/login
 // @access  private -- protect and iscompany middleware
 const addInternship = asyncHandler(async (req, res) => {
+  const {
+    title,
+    description,
+    requirement,
+    responsibilities,
+    duration,
+  } = req.body;
   const internship = await Internship.create({
     admin: req.admin._id,
     title,

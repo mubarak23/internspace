@@ -13,11 +13,11 @@ const authAdmin = asyncHandler(async (req, res) => {
 
   if (admin && (await admin.matchPassword(password))) {
     res.json({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      isAdmin: user.isAdmin,
-      token: generateToken(user._id),
+      _id: admin._id,
+      name: admin.name,
+      email: admin.email,
+      isAdmin: admin.isAdmin,
+      token: generateToken(admin._id),
     });
   } else {
     res.status(401);
@@ -41,7 +41,7 @@ const registerAdmin = asyncHandler(async (req, res) => {
     email,
     password,
   });
-  if (intern) {
+  if (admin) {
     res.status(201).json({
       _id: admin._id,
       email: admin.email,
