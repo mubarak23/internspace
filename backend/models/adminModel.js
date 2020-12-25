@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 
-const userShema = mongoose.Schema({
+const adminShema = mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -21,12 +21,17 @@ const userShema = mongoose.Schema({
     required: true,
     default: false,
   },
+  isCompany: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
 });
 
-userShema.methods.matchPassword = async function (enteredPassword) {
+adminShema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
-userShema.pre("save", async function (next) {
+adminShema.pre("save", async function (next) {
   if (!this.isModified("password")) {
     next();
   }
@@ -34,6 +39,6 @@ userShema.pre("save", async function (next) {
   this.password = await bcrypt.hash(this.password, salt);
 });
 
-const User = mongoose.model("User", userShema);
+const Admin = mongoose.model("Admin", adminShema);
 
-export default User;
+export default Admin;

@@ -1,7 +1,7 @@
 {
-  "name": "proshop",
+  "name": "internspace",
   "version": "1.0.0",
-  "description": "unique shop",
+  "description": "opportunity for youth",
   "main": "server.js",
   "type": "module",
   "dependencies": {

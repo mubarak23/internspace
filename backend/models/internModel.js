@@ -41,6 +41,6 @@ internSchema.pre("save", async function (next) {
   this.password = await bcrypt.hash(this.password, salt);
 });
 
-const Intern = mongoose.model("User", internSchema);
+const Intern = mongoose.model("Intern", internSchema);
 
 export default Intern;
