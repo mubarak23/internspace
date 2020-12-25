@@ -1,4 +1,4 @@
-import bcrypt from "bcryptjs";
+import mongoose from "mongoose";
 
 const internshipSchema = mongoose.Schema({
   title: {
@@ -27,3 +27,7 @@ const internshipSchema = mongoose.Schema({
     default: false,
   },
 });
+
+const Internship = mongoose.model("Internship", internshipSchema);
+
+export default Internship;
