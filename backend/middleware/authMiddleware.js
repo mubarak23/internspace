@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import asyncHandler from "express-async-handler";
 import User from "../models/adminModel.js";
+import Admin from "../models/adminModel";
 
 const protect = asyncHandler(async (req, res, next) => {
   let token;
@@ -14,8 +15,9 @@ const protect = asyncHandler(async (req, res, next) => {
       //console.log(token);
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
       //console.log(decoded);
-      req.user = await User.findById(decoded.id).select("-password");
-      console.log(req.user._id);
+      req.admin = await Admin.findById(decoded.id).select("-password");
+      console.log(req.admin._id);
+      //run a check tot ensure only admin with iscompany flag set to true can create internship;
       next();
     } catch (error) {
       console.log(error);

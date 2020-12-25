@@ -24,7 +24,7 @@ const adminShema = mongoose.Schema({
   isCompany: {
     type: Boolean,
     required: true,
-    default: false,
+    default: true,
   },
 });
 

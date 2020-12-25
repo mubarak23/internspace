@@ -1,6 +1,11 @@
 import mongoose from "mongoose";
 
 const internshipSchema = mongoose.Schema({
+  admin: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: "Admin",
+  },
   title: {
     type: String,
     required: true,
@@ -13,7 +18,7 @@ const internshipSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  responsibility: {
+  responsibilities: {
     type: String,
     required: true,
   },
@@ -21,10 +26,11 @@ const internshipSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  //false -- closed, true -- open
   status: {
     type: Boolean,
     required: true,
-    default: false,
+    default: true,
   },
 });
 
