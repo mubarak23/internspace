@@ -1,13 +1,14 @@
 import express from "express";
 const router = express.Router();
 import {
+  getInternships,
   addInternship,
   updateInternship,
   updateInternshipStatus,
   singleInternshipById,
 } from "../controllers/internshipController.js";
-import { protect, admin } from "../middleware/authMiddleware.js";
-router.route("/").post(protect, addInternship);
+import { protect } from "../middleware/authMiddleware.js";
+router.route("/").get(getInternships).post(protect, addInternship);
 router
   .route("/:id")
   .get(singleInternshipById)

@@ -1,9 +1,20 @@
 import asyncHandler from "express-async-handler";
-
 import Internship from "../models/InternshipModel.js";
 
+// @desc    fetch internship opening
+// @route   GET /api/internship
+// @access  public
+const getInternships = asyncHandler(async (req, res) => {
+  const pageSize = 3;
+  const page = Number(req.query.pageNumber) || 1;
+  const interhsips = Internship.find()
+    .limit(pageSize)
+    .skip(pageSize * (page - 1));
+  res.json({ interhsips, page, pages: Math.ceil(count / pageSize) });
+});
+
 // @desc    add internship opening
-// @route   POST /api/users/login
+// @route   POST /api/internship
 // @access  private -- protect and iscompany middleware
 const addInternship = asyncHandler(async (req, res) => {
   const {
@@ -89,6 +100,7 @@ const singleInternshipById = asyncHandler(async (req, res) => {
 });
 
 export {
+  getInternships,
   addInternship,
   updateInternshipStatus,
   updateInternship,
