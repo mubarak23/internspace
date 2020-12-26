@@ -1,5 +1,6 @@
 import asyncHandler from "express-async-handler";
 import Internship from "../models/InternshipModel.js";
+import { findInternById, findInternshipById } from "../utils/helpers.js";
 
 // @desc    fetch internship opening
 // @route   GET /api/internship
@@ -7,7 +8,8 @@ import Internship from "../models/InternshipModel.js";
 const getInternships = asyncHandler(async (req, res) => {
   const pageSize = 3;
   const page = Number(req.query.pageNumber) || 1;
-  const interhsips = Internship.find()
+  const count = await Internship.countDocuments();
+  const interhsips = await Internship.find()
     .limit(pageSize)
     .skip(pageSize * (page - 1));
   res.json({ interhsips, page, pages: Math.ceil(count / pageSize) });
@@ -45,7 +47,7 @@ const addInternship = asyncHandler(async (req, res) => {
 // @access  private
 const updateInternshipStatus = asyncHandler(async (req, res) => {
   //find the inter using the params provides
-  const internship = await Internship.findById(req.params.id);
+  const internship = await findInternshipById(req.param.id);
   //run a chewck tto ensure admin that create the internship is the one updating the status
   if (internship.user !== req.admin._id) {
     res.status(400);
@@ -69,7 +71,7 @@ const updateInternship = asyncHandler(async (req, res) => {
     responsibilities,
     duration,
   } = req.body;
-  const internship = await Internship.findById(req.params.id);
+  const internship = await findInternshipById(req.params.id);
   if (internship) {
     internship.name = name;
     internship.requirement = requirement;
@@ -90,7 +92,7 @@ const updateInternship = asyncHandler(async (req, res) => {
 // @access  Public
 
 const singleInternshipById = asyncHandler(async (req, res) => {
-  const internship = Internship.findById(req.params.id);
+  const internship = await findInternshipById(req.params.id);
   if (internship) {
     res.status(200).json(internship);
   } else {

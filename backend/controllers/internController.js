@@ -2,8 +2,7 @@ import asyncHandler from "express-async-handler";
 import Intern from "../models/internModel.js";
 import Internship from "../models/InternshipModel.js";
 import generateToken from "../utils/generateToken.js";
-import { Validator } from "node-input-validator";
-
+import { findInternByEmail, findInternById } from "../utils/helpers.js";
 // @desc    Auth intern & get token
 // @route   POST /api/users/login
 // @access  Public
@@ -11,7 +10,7 @@ import { Validator } from "node-input-validator";
 const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
-  const intern = await Intern.findOne({ email });
+  const intern = await findInternByEmail(email);
 
   if (intern && (await intern.matchPassword(password))) {
     res.json({
@@ -32,7 +31,7 @@ const authUser = asyncHandler(async (req, res) => {
 const registerIntern = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
 
-  const internExist = await Intern.findOne({ email });
+  const internExist = await findInternByEmail(email);
   if (internExist) {
     res.status(400);
     throw new Error("An Intern with the provided email Address already exists");
@@ -61,11 +60,11 @@ const registerIntern = asyncHandler(async (req, res) => {
 const updateinternProfile = asyncHandler(async (req, res) => {
   const { name, password, phone_number, address, cv_upload } = req.body;
   //check the intern match withe login intern
-  if (req.intern._id !== req.params.id) {
+  if (!req.intern._id === req.params.id) {
     res.status(400);
     throw new Error("invalid request");
   }
-  const intern = Internship.findById(req.params.id);
+  const intern = await findInternById(req.params.id);
   if (intern) {
     intern.name = name;
     intern.password = password;

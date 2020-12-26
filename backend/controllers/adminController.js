@@ -19,6 +19,7 @@ const authAdmin = asyncHandler(async (req, res) => {
       name: admin.name,
       email: admin.email,
       isAdmin: admin.isAdmin,
+      isCompany: admin.isCompany,
       token: generateToken(admin._id),
     });
   } else {
@@ -33,7 +34,7 @@ const authAdmin = asyncHandler(async (req, res) => {
 const registerAdmin = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
 
-  const adminExist = await Admin.findOne({ email });
+  const adminExist = await await findAdminByEmail(email);
   if (adminExist) {
     res.status(400);
     throw new Error("An Admin with the provided email Address already exists");
@@ -48,6 +49,7 @@ const registerAdmin = asyncHandler(async (req, res) => {
       _id: admin._id,
       email: admin.email,
       name: admin.name,
+      isCompany: admin.iscompany,
       token: generateToken(admin._id),
     });
   } else {
