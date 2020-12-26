@@ -4,5 +4,5 @@ import { appliedForIntership } from "../controllers/appliedinternshipController.
 import { protect } from "../middleware/authMiddleware.js";
 import { internauth } from "../middleware/internMiddleware.js";
 
-router.route("/").get(protect, internauth, appliedForIntership);
+router.route("/").get(internauth, appliedForIntership);
 export default router;

@@ -7,12 +7,12 @@ import {
   updateInternshipStatus,
   singleInternshipById,
 } from "../controllers/internshipController.js";
-import { protect } from "../middleware/authMiddleware.js";
-router.route("/").get(getInternships).post(protect, addInternship);
+import { protect, iscompany } from "../middleware/authMiddleware.js";
+router.route("/").get(getInternships).post(protect, iscompany, addInternship);
 router
   .route("/:id")
   .get(singleInternshipById)
-  .post(protect, updateInternshipStatus)
-  .put(protect, updateInternship);
+  .post(protect, iscompany, updateInternshipStatus)
+  .put(protect, iscompany, updateInternship);
 
 export default router;

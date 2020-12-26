@@ -38,8 +38,17 @@ const admin = (req, res, next) => {
     //res.status(401);
     //throw new Error("Nott Authorized as Adminn");
     res.status(401);
-    throw new Error("Nott Authorized as Adminn");
+    throw new Error("Not Authorized as Adminn");
   }
 };
 
-export { protect, admin };
+const iscompany = (req, res, next) => {
+  if (req.admin && req.admin.isCompany) {
+    next();
+  } else {
+    res.status(401);
+    throw new Error("Not Authorized as Admin");
+  }
+};
+
+export { protect, admin, iscompany };
