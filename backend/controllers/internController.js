@@ -55,4 +55,29 @@ const registerIntern = asyncHandler(async (req, res) => {
   }
 });
 
-export { authUser, registerIntern };
+// @desc    update intern profile
+// @route   PUT /api/intern
+// @access  private -- internauth
+const updateinternProfile = asyncHandler(async (req, res) => {
+  const { name, password, phone_number, address, cv_upload } = req.body;
+  //check the intern match withe login intern
+  if (req.intern._id !== req.params.id) {
+    res.status(400);
+    throw new Error("invalid request");
+  }
+  const intern = Internship.findById(req.params.id);
+  if (intern) {
+    intern.name = name;
+    intern.password = password;
+    intern.phone_number = phone_number;
+    intern.cv_upload = cv_upload;
+    intern.address = address;
+    const updateInternProfile = await intern.save();
+    res.json(updateInternProfile);
+  } else {
+    res.status(404);
+    throw new Error("Internship not found");
+  }
+});
+
+export { authUser, registerIntern, updateinternProfile };
