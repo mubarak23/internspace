@@ -9,6 +9,7 @@ import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import adminRouter from "./routes/adminRoute.js";
 import internRouter from "./routes/internRoutes.js";
 import intternshipRouter from "./routes/internshiproute.js";
+import appliedInternshipRouter from "./routes/appliedinternRoutes.js";
 import uploadRouter from "./routes/uploadRoutes.js";
 import dotenv from "dotenv";
 
@@ -41,7 +42,7 @@ app.use(errorHandler);
 app.use("/api/admin", adminRouter);
 app.use("/api/interns", internRouter);
 app.use("/api/internship", intternshipRouter);
-//app.use("/api/orders", orderRouter);
+app.use("/api/appliedInternship", appliedInternshipRouter);
 app.use("/api/upload", uploadRouter);
 
 //allow us t orender folder in node with module syntex
