@@ -1,6 +1,8 @@
+import e from "express";
 import asyncHandler from "express-async-handler";
 import Admin from "../models/adminModel.js";
 import generateToken from "../utils/generateToken.js";
+import { findAdminByEmail } from "../utils/helpers.js";
 
 // @desc    Auth Admin & get token
 // @route   POST /api/users/login
@@ -9,7 +11,7 @@ import generateToken from "../utils/generateToken.js";
 const authAdmin = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
-  const admin = await Admin.findOne({ email });
+  const admin = await findAdminByEmail(email);
 
   if (admin && (await admin.matchPassword(password))) {
     res.json({
