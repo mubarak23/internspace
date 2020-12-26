@@ -74,4 +74,23 @@ const updateInternship = asyncHandler(async (req, res) => {
   }
 });
 
-export { addInternship, updateInternshipStatus, updateInternship };
+// @desc     single internship
+// @route   GET /api/interhsip/:id
+// @access  Public
+
+const singleInternshipById = asyncHandler(async (req, res) => {
+  const internship = Internship.findById(req.params.id);
+  if (internship) {
+    res.status(200).json(internship);
+  } else {
+    res.status(404);
+    throw new Error("Internship not found");
+  }
+});
+
+export {
+  addInternship,
+  updateInternshipStatus,
+  updateInternship,
+  singleInternshipById,
+};
