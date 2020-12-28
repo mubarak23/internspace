@@ -41,7 +41,7 @@ const AdminScreen = ({ history }) => {
           </a>
           <a href="users.html" className="list-group-item">
             <i class="fas fa-handshake-alt-slash"></i> Applied Internship{" "}
-            <span className="badge">203</span>
+            <span className="badge">3</span>
           </a>
         </div>
       </Col>
@@ -64,11 +64,11 @@ const AdminScreen = ({ history }) => {
             </thead>
             <tbody>
               {internships.map((internship) => (
-                <tr>
-                  <td>67684896FHTH</td>
-                  <td>social media inter</td>
+                <tr key={internship._id}>
+                  <td>{internship._id}</td>
+                  <td>{internship.title}</td>
                   <td>34</td>
-                  <td>Admin Staff</td>
+                  <td>{adminInfo.name}</td>
                   <td>
                     <Link to={`/orders/3y4y5`}>Upadte Status</Link>{" "}
                     <LinkContainer to={`/admin/user/4y5ye/edit`}>
