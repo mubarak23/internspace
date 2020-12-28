@@ -1,10 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Table, Form, Button, Row, Col } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { adminInternshipList } from "../actions/adminActions";
+import Message from "../components/Message";
+import Loader from "../components/Loader";
 
-const AdminScreen = () => {
+const AdminScreen = ({ history }) => {
+  const dispatch = useDispatch();
+  const adminLogin = useSelector((state) => state.adminLogin);
+  const { adminInfo } = adminLogin;
+  const internshipsList = useSelector((state) => state.internshipList);
+  const { loading, error, internships } = internshipsList;
+  console.log(internships);
+  console.log(adminInfo);
+  useEffect(() => {
+    if (!adminInfo.isCompany) {
+      history.push("/login");
+    } else {
+      dispatch(adminInternshipList());
+    }
+  }, [dispatch, history, adminInfo]);
   return (
     <Row>
       <Col md={3}>
@@ -30,75 +47,41 @@ const AdminScreen = () => {
       </Col>
       <Col md="9">
         <h4>Latest Internship Available</h4>
-        <Table striped bordered hover responsive className="table-sm">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Title</th>
-              <th>Applied</th>
-              <th>Published By</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>67684896FHTH</td>
-              <td>social media inter</td>
-              <td>34</td>
-              <td>Admin Staff</td>
-              <td>
-                <Link to={`/orders/3y4y5`}>Upadte Status</Link>{" "}
-                <LinkContainer to={`/admin/user/4y5ye/edit`}>
-                  <Button variant="light" className="btn-sm">
-                    <i className="fas fa-edit"></i>
-                  </Button>
-                </LinkContainer>
-              </td>
-            </tr>
-            <tr>
-              <td>67684896FHTH</td>
-              <td>social media inter</td>
-              <td>34</td>
-              <td>Admin Staff</td>
-              <td>
-                <Link to={`/orders/3y4y5`}>Upadte Status</Link>{" "}
-                <LinkContainer to={`/admin/user/4y5ye/edit`}>
-                  <Button variant="light" className="btn-sm">
-                    <i className="fas fa-edit"></i>
-                  </Button>
-                </LinkContainer>
-              </td>
-            </tr>
-            <tr>
-              <td>67684896FHTH</td>
-              <td>social media inter</td>
-              <td>34</td>
-              <td>Admin Staff</td>
-              <td>
-                <Link to={`/orders/3y4y5`}>Upadte Status</Link>{" "}
-                <LinkContainer to={`/admin/user/4y5ye/edit`}>
-                  <Button variant="light" className="btn-sm">
-                    <i className="fas fa-edit"></i>
-                  </Button>
-                </LinkContainer>
-              </td>
-            </tr>
-            <tr>
-              <td>67684896FHTH</td>
-              <td>social media inter</td>
-              <td>34</td>
-              <td>Admin Staff</td>
-              <td>
-                <Link to={`/orders/3y4y5`}>Upadte Status</Link>{" "}
-                <LinkContainer to={`/admin/user/4y5ye/edit`}>
-                  <Button variant="light" className="btn-sm">
-                    <i className="fas fa-edit"></i>
-                  </Button>
-                </LinkContainer>
-              </td>
-            </tr>
-          </tbody>
-        </Table>
+        {loading ? (
+          <Loader />
+        ) : error ? (
+          <Message variant="danger"> {error}</Message>
+        ) : (
+          <Table striped bordered hover responsive className="table-sm">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Applied</th>
+                <th>Published By</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {internships.map((internship) => (
+                <tr>
+                  <td>67684896FHTH</td>
+                  <td>social media inter</td>
+                  <td>34</td>
+                  <td>Admin Staff</td>
+                  <td>
+                    <Link to={`/orders/3y4y5`}>Upadte Status</Link>{" "}
+                    <LinkContainer to={`/admin/user/4y5ye/edit`}>
+                      <Button variant="light" className="btn-sm">
+                        <i className="fas fa-edit"></i>
+                      </Button>
+                    </LinkContainer>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        )}
       </Col>
     </Row>
   );

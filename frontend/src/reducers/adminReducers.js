@@ -31,7 +31,7 @@ export const adminLoginReducer = (state = {}, action) => {
     case ADMIN_LOGIN_SUCCESS:
       return { loading: false, adminInfo: action.payload };
     case ADMIN_LOGIN_FAIL:
-      return { loading: false, error: action.payload };
+      return { loading: false, error: "invalid email or password" };
     case ADMIN_LOGOUT:
       return {};
     default:

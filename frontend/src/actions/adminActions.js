@@ -8,24 +8,27 @@ import {
   ADMIN_LOGIN_FAIL,
 } from "../constants/adminConstants.js";
 
-export const adminInternshipList = () => async (dispatch) => {
+export const adminInternshipList = () => async (dispatch, getState) => {
   try {
     dispatch({
       type: ADMIN_INTERSHIPS_REQUEST,
     });
-    const { data } = await axios.post("api/internships");
+    const {
+      adminLogin: { adminInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${adminInfo.token}`,
+      },
+    };
+    const { data } = await axios.get("/api/internships", config);
     dispatch({
       type: ADMIN_INTERSHIPS_SUCCESS,
       payload: data,
     });
   } catch (error) {
-    dispatch({
-      type: ADMIN_INTERSHIPS_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.response.message,
-    });
+    console.log("error");
   }
 };
 

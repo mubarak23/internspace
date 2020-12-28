@@ -6,13 +6,8 @@ import { findInternById, findInternshipById } from "../utils/helpers.js";
 // @route   GET /api/internship
 // @access  public
 const getInternships = asyncHandler(async (req, res) => {
-  const pageSize = 3;
-  const page = Number(req.query.pageNumber) || 1;
-  const count = await Internship.countDocuments();
-  const interhsips = await Internship.find()
-    .limit(pageSize)
-    .skip(pageSize * (page - 1));
-  res.json({ interhsips, page, pages: Math.ceil(count / pageSize) });
+  const internships = await Internship.find();
+  res.json(internships);
 });
 
 // @desc    add internship opening

@@ -41,7 +41,7 @@ app.use(errorHandler);
 //app.use("/api/products", productRoute);
 app.use("/api/admin", adminRouter);
 app.use("/api/interns", internRouter);
-app.use("/api/internship", intternshipRouter);
+app.use("/api/internships", intternshipRouter);
 app.use("/api/appliedInternship", appliedInternshipRouter);
 app.use("/api/upload", uploadRouter);
 
