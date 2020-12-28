@@ -27,7 +27,7 @@ const Header = () => {
             <Nav className="ml-auto">
               <LinkContainer to="/login">
                 <Nav.Link>
-                  <i className="fas fa-user"></i> Sign In
+                  <i class="fas fa-head-side-mask"></i>View Internship
                 </Nav.Link>
               </LinkContainer>
               <LinkContainer to="/login">
