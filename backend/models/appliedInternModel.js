@@ -12,8 +12,8 @@ const appliedinternshipSchema = mongoose.Schema({
     ref: "Intern",
   },
   applied_date: {
-    type: String,
-    required: true,
+    type: Date,
+    default: Date.now,
   },
   title: {
     type: String,
