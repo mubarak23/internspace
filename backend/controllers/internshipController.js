@@ -1,6 +1,7 @@
 import asyncHandler from "express-async-handler";
 import Internship from "../models/InternshipModel.js";
 import { findInternById, findInternshipById } from "../utils/helpers.js";
+import { validateInnternship } from "../utils/validate.js";
 
 // @desc    fetch internship opening
 // @route   GET /api/internship
@@ -14,6 +15,8 @@ const getInternships = asyncHandler(async (req, res) => {
 // @route   POST /api/internship
 // @access  private -- protect and iscompany middleware
 const addInternship = asyncHandler(async (req, res) => {
+  const { error } = validateInnternship(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
   const {
     title,
     description,
