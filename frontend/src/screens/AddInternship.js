@@ -15,6 +15,7 @@ import { adminInternshipList } from "../actions/adminActions";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { crearteInternship } from "../actions/internshipActions.js";
+import { ADMIN_INTERSHIPS_RESET } from "../constants/adminConstants";
 
 const AdminInternship = ({ history }) => {
   const [title, setTitle] = useState("");
@@ -34,6 +35,7 @@ const AdminInternship = ({ history }) => {
       history.push("/login");
     }
     if (success) {
+      dispatch({ type: ADMIN_INTERSHIPS_RESET });
       history.push("/admin");
     }
   }, [dispatch, history, adminInfo, success]);
