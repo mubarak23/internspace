@@ -12,14 +12,19 @@ import {
   userUpdateReducer,
 } from "./reducers/userReducers.js";
 
-import { internshipListReducer } from "./reducers/adminReducers.js";
+import {
+  internshipListReducer,
+  adminLoginReducer,
+} from "./reducers/adminReducers.js";
 
-import { adminLoginReducer } from "./reducers/adminReducers.js";
+import { createInternshipReducer } from "./reducers/internshipReducers";
 
 const reducer = combineReducers({
   internshipList: internshipListReducer,
 
   adminLogin: adminLoginReducer,
+
+  createInternship: createInternshipReducer,
 
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
