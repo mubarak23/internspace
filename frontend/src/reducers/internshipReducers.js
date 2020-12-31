@@ -2,6 +2,7 @@ import {
   CREATE_INTERNSHIP_REQUEST,
   CREATE_INTERNSHIP_SUCCESS,
   CREATE_INTERNSHIP_FAIL,
+  CREATE_INTERNSHIP_RESET,
 } from "../constants/internnshipConstant.js";
 
 export const createInternshipReducer = (state = {}, action) => {

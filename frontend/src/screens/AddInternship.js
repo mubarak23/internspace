@@ -1,11 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { Table, Form, Button, Row, Col, Container } from "react-bootstrap";
+import {
+  Table,
+  Form,
+  Button,
+  Row,
+  Col,
+  Container,
+  TextField,
+} from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { adminInternshipList } from "../actions/adminActions";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
+import { crearteInternship } from "../actions/internshipActions.js";
 
 const AdminInternship = ({ history }) => {
   const [title, setTitle] = useState("");
@@ -17,17 +26,30 @@ const AdminInternship = ({ history }) => {
   const dispatch = useDispatch();
   const adminLogin = useSelector((state) => state.adminLogin);
   const { adminInfo } = adminLogin;
-  const internshipsList = useSelector((state) => state.internshipList);
-  const { loading, error, internships } = internshipsList;
-  console.log(internships);
-  console.log(adminInfo);
+
+  const internshipCreate = useSelector((state) => state.createInternship);
+  const { loading, error, success } = internshipCreate;
   useEffect(() => {
     if (!adminInfo.isCompany) {
       history.push("/login");
-    } else {
-      dispatch(adminInternshipList());
     }
-  }, [dispatch, history, adminInfo]);
+    if (success) {
+      history.push("/admin");
+    }
+  }, [dispatch, history, adminInfo, success]);
+
+  const handlecreateInternship = (e) => {
+    e.preventDefault();
+    const data = {
+      title,
+      description,
+      requirement,
+      responsibilities,
+      duration,
+    };
+    console.log(data);
+    dispatch(crearteInternship(data));
+  };
   return (
     <Row>
       <Col md={3}>
@@ -53,9 +75,11 @@ const AdminInternship = ({ history }) => {
       </Col>
       <Col md="9">
         <h4>Add Internship</h4>
+        {loading && <Loader />}
+        {error && <Message variant="danger">{error}</Message>}
         <Row>
           <Container className="justify-content-md-center">
-            <form onSubmit={submitHandle}>
+            <form onSubmit={handlecreateInternship}>
               <Form.Group controlId="title">
                 <Form.Label>Title</Form.Label>
                 <Form.Control
@@ -68,11 +92,11 @@ const AdminInternship = ({ history }) => {
 
               <Form.Group controlId="description">
                 <Form.Label>Description</Form.Label>
-                <TextField
+                <Form.Control
                   id="standard-multiline-flexible"
                   label="Description"
-                  multiline
-                  rowsMax={4}
+                  as="textarea"
+                  rows={3}
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                 />
@@ -80,11 +104,10 @@ const AdminInternship = ({ history }) => {
 
               <Form.Group controlId="requirement">
                 <Form.Label>Requirement</Form.Label>
-                <TextField
-                  id="standard-multiline-flexible"
+                <Form.Control
+                  as="textarea"
+                  rows={3}
                   label="Requirement"
-                  multiline
-                  rowsMax={4}
                   value={requirement}
                   onChange={(e) => setRequirement(e.target.value)}
                 />
@@ -92,11 +115,11 @@ const AdminInternship = ({ history }) => {
 
               <Form.Group controlId="responsibilities">
                 <Form.Label>Responsibilities</Form.Label>
-                <TextField
+                <Form.Control
                   id="standard-multiline-flexible"
                   label="Responsibilities"
-                  multiline
-                  rowsMax={4}
+                  as="textarea"
+                  rows={3}
                   value={responsibilities}
                   onChange={(e) => setResponsibilities(e.target.value)}
                 />

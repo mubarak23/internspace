@@ -19,7 +19,7 @@ export const crearteInternship = (internship) => async (dispatch, getState) => {
         Authorization: `Bearer ${adminInfo.token}`,
       },
     };
-    const { data } = axios.post("/api/internship", internship, config);
+    const { data } = axios.post("/api/internships", internship, config);
     dispatch({
       type: CREATE_INTERNSHIP_SUCCESS,
       payload: data,
