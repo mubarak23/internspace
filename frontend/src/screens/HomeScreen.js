@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Row, Col, Card } from "react-bootstrap";
+import { Row, Col, Card, CardDeck } from "react-bootstrap";
 import Meta from "../components/Meta";
 
 import { Link } from "react-router-dom";
@@ -30,22 +30,27 @@ const HomeScreen = ({ match }) => {
         <Row>
           {internships.map((internship) => (
             <Col className="col-md-6 mb-2">
-              <Card style={{ width: "30rem" }} bg="Warning" text="info">
-                <Card.Body>
-                  <Card.Title>{internship.title}</Card.Title>
-                  <Card.Subtitle className=" subtitle">
-                    posted by: {internship.admin.name}
-                  </Card.Subtitle>
-                  <Card.Text>
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </Card.Text>
-                  <Card.Link href="#">
-                    Duration: {internship.duration}
-                  </Card.Link>
-                  <Card.Link href="#">Status: Open</Card.Link>
-                </Card.Body>
-              </Card>
+              <CardDeck>
+                <Card style={{ width: "30rem" }} bg="Warning" text="info">
+                  <Card.Body>
+                    <Link to={`/internship/${internship._id}`}>
+                      {" "}
+                      <Card.Title>{internship.title}</Card.Title>{" "}
+                    </Link>
+                    <Card.Subtitle className=" subtitle">
+                      posted by: {internship.admin.name}
+                    </Card.Subtitle>
+                    <Card.Text>
+                      Some quick example text to build on the card title and
+                      make up the bulk of the card's content.
+                    </Card.Text>
+                    <Card.Link href="#">
+                      Duration: {internship.duration}
+                    </Card.Link>
+                    <Card.Link href="#">Status: Open</Card.Link>
+                  </Card.Body>
+                </Card>
+              </CardDeck>
             </Col>
           ))}
         </Row>
