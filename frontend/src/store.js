@@ -17,10 +17,14 @@ import {
   adminLoginReducer,
 } from "./reducers/adminReducers.js";
 
-import { createInternshipReducer } from "./reducers/internshipReducers";
+import {
+  createInternshipReducer,
+  internshipsListReducers,
+} from "./reducers/internshipReducers";
 
 const reducer = combineReducers({
   internshipList: internshipListReducer,
+  internshipsListHome: internshipsListReducers,
 
   adminLogin: adminLoginReducer,
 
