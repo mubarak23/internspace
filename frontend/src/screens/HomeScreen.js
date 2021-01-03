@@ -34,7 +34,7 @@ const HomeScreen = ({ match }) => {
                 <Card.Body>
                   <Card.Title>{internship.title}</Card.Title>
                   <Card.Subtitle className=" subtitle">
-                    posted by: Techarewa Media
+                    posted by: {internship.admin.name}
                   </Card.Subtitle>
                   <Card.Text>
                     Some quick example text to build on the card title and make

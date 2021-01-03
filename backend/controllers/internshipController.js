@@ -7,7 +7,7 @@ import { validateInnternship } from "../utils/validate.js";
 // @route   GET /api/internship
 // @access  public
 const getInternships = asyncHandler(async (req, res) => {
-  const internships = await Internship.find();
+  const internships = await Internship.find().populate("admin", "name -_id");
   res.json(internships);
 });
 
