@@ -6,6 +6,9 @@ import {
   INTERNSHIPS_LIST_REQUEST,
   INTERNSHIPS_LIST_SUCCESS,
   INTERNSHIPS_LIST_FAIL,
+  SINGLE_INTERNSHIP_REQUEST,
+  SINGLE_INTERNSHIP_SUCCESS,
+  SINGLE_INTERNSHIP_FAIL,
 } from "../constants/internnshipConstant.js";
 
 export const crearteInternship = (internship) => async (dispatch, getState) => {
@@ -51,6 +54,28 @@ export const listinternships = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: INTERNSHIPS_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.response.message,
+    });
+  }
+};
+
+export const internshipDetails = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: SINGLE_INTERNSHIP_REQUEST });
+
+    const { data } = await axios.get(`/api/internships/${id}`);
+
+    dispatch({
+      type: SINGLE_INTERNSHIP_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    console.log(error);
+    dispatch({
+      type: SINGLE_INTERNSHIP_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

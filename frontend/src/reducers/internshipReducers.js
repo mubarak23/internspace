@@ -6,6 +6,9 @@ import {
   INTERNSHIPS_LIST_REQUEST,
   INTERNSHIPS_LIST_SUCCESS,
   INTERNSHIPS_LIST_FAIL,
+  SINGLE_INTERNSHIP_FAIL,
+  SINGLE_INTERNSHIP_SUCCESS,
+  SINGLE_INTERNSHIP_REQUEST,
 } from "../constants/internnshipConstant.js";
 
 export const createInternshipReducer = (state = {}, action) => {
@@ -36,6 +39,22 @@ export const internshipsListReducers = (
         internships: action.payload,
       };
     case INTERNSHIPS_LIST_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const internshipDetailsReducer = (
+  state = { internship: {} },
+  action
+) => {
+  switch (action.type) {
+    case SINGLE_INTERNSHIP_REQUEST:
+      return { loading: true, ...state };
+    case SINGLE_INTERNSHIP_SUCCESS:
+      return { loading: false, internship: action.payload };
+    case SINGLE_INTERNSHIP_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;

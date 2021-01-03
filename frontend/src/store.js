@@ -20,12 +20,13 @@ import {
 import {
   createInternshipReducer,
   internshipsListReducers,
+  internshipDetailsReducer,
 } from "./reducers/internshipReducers";
 
 const reducer = combineReducers({
   internshipList: internshipListReducer,
   internshipsListHome: internshipsListReducers,
-
+  internshipDetails: internshipDetailsReducer,
   adminLogin: adminLoginReducer,
 
   createInternship: createInternshipReducer,

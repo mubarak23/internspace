@@ -90,7 +90,9 @@ const updateInternship = asyncHandler(async (req, res) => {
 // @access  Public
 
 const singleInternshipById = asyncHandler(async (req, res) => {
-  const internship = await findInternshipById(req.params.id);
+  const internship = await findInternshipById(req.params.id)
+    .populated("admin", "name -_id")
+    .select("description title duration responsibilities requirement name ");
   if (internship) {
     res.status(200).json(internship);
   } else {
