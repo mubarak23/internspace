@@ -26,6 +26,10 @@ const internshipSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  except: {
+    type: String,
+    required: true,
+  },
   //false -- closed, true -- open
   status: {
     type: Boolean,

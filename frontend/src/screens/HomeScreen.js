@@ -1,69 +1,89 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Card } from "react-bootstrap";
 import Meta from "../components/Meta";
-//import axios from "axios";
+
 import { Link } from "react-router-dom";
 import { listProducts } from "../actions/productAction.js";
-import Product from "../components/Product";
+
 import Message from "../components/Message";
 import Loader from "../components/Loader";
-import Paginate from "../components/Paginate.js";
-import ProductCarousel from "../components/ProductCarousel";
 
 const HomeScreen = ({ match }) => {
-  //const [products, setProducts] = useState([]);
-  //useEffect(() => {
-  //const fetchProducts = async () => {
-  //const { data } = await axios.get("api/products");
-  //setProducts(data);
-  //};
-  //fetchProducts();
-  //}, []);
-  const keyword = match.params.keyword;
-  const pageNumber = match.params.pageNumber;
-  console.log(pageNumber);
   const dispatch = useDispatch();
-  const productList = useSelector((state) => state.productList);
-  const { loading, error, products, page, pages } = productList;
-
   useEffect(() => {
-    dispatch(listProducts(keyword, pageNumber));
-  }, [dispatch, keyword, pageNumber]);
+    dispatch(listProducts());
+  }, [dispatch]);
 
   return (
     <>
-      <Meta />
-      {!keyword ? (
-        <ProductCarousel />
-      ) : (
-        <Link to="/" className="btn btn-light">
-          Go Back
-        </Link>
-      )}
-      <h1>Latest Products</h1>
-      {loading ? (
-        //<h2>Loading...</h2>
-        <Loader />
-      ) : error ? (
-        <Message variant="danger">{error}</Message>
-      ) : (
-        <>
-          <Row>
-            {products.map((product) => (
-              <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
-                <Product product={product} />
-              </Col>
-            ))}
-          </Row>
-
-          <Paginate
-            pages={pages}
-            page={page}
-            keyword={keyword ? keyword : ""}
-          />
-        </>
-      )}
+      <h3>Latest Internship Opening</h3>
+      <Row>
+        <Col className="col-md-6 mb-2">
+          <Card style={{ width: "30rem" }} bg="Warning" text="info">
+            <Card.Body>
+              <Card.Title>Social Media Manager</Card.Title>
+              <Card.Subtitle className=" subtitle">
+                posted by: Techarewa Media
+              </Card.Subtitle>
+              <Card.Text>
+                Some quick example text to build on the card title and make up
+                the bulk of the card's content.
+              </Card.Text>
+              <Card.Link href="#">Duration: 8 Month</Card.Link>
+              <Card.Link href="#">Status: Open</Card.Link>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col className="col-md-6">
+          <Card style={{ width: "30rem" }}>
+            <Card.Body>
+              <Card.Title>Card Title</Card.Title>
+              <Card.Subtitle className="mb-2 text-muted">
+                Card Subtitle
+              </Card.Subtitle>
+              <Card.Text>
+                Some quick example text to build on the card title and make up
+                the bulk of the card's content.
+              </Card.Text>
+              <Card.Link href="#">Card Link</Card.Link>
+              <Card.Link href="#">Another Link</Card.Link>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col className="col-md-6">
+          <Card style={{ width: "30rem" }}>
+            <Card.Body>
+              <Card.Title>Card Title</Card.Title>
+              <Card.Subtitle className="mb-2 text-muted">
+                Card Subtitle
+              </Card.Subtitle>
+              <Card.Text>
+                Some quick example text to build on the card title and make up
+                the bulk of the card's content.
+              </Card.Text>
+              <Card.Link href="#">Card Link</Card.Link>
+              <Card.Link href="#">Another Link</Card.Link>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col className="col-md-6">
+          <Card style={{ width: "30rem" }}>
+            <Card.Body>
+              <Card.Title>Card Title</Card.Title>
+              <Card.Subtitle className="mb-2 text-muted">
+                Card Subtitle
+              </Card.Subtitle>
+              <Card.Text>
+                Some quick example text to build on the card title and make up
+                the bulk of the card's content.
+              </Card.Text>
+              <Card.Link href="#">Card Link</Card.Link>
+              <Card.Link href="#">Another Link</Card.Link>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
     </>
   );
 };

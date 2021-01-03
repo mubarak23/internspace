@@ -34,7 +34,7 @@ const authAdmin = asyncHandler(async (req, res) => {
 const registerAdmin = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
 
-  const adminExist = await await findAdminByEmail(email);
+  const adminExist = await findAdminByEmail(email);
   if (adminExist) {
     res.status(400);
     throw new Error("An Admin with the provided email Address already exists");
