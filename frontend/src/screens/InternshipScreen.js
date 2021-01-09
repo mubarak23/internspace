@@ -17,6 +17,7 @@ import Loader from "../components/Loader";
 import Message from "../components/Message";
 import Meta from "../components/Meta";
 import { internshipDetails } from "../actions/internshipActions";
+import { apply_for_internship } from "../actions/appliedInternshipActions";
 
 const ProductScreen = ({ history, match }) => {
   const dispatch = useDispatch();
@@ -31,10 +32,8 @@ const ProductScreen = ({ history, match }) => {
 
   const submitHandlerApply = (e) => {
     e.preventDefault();
-    const internId = adminInfo._id;
-    const internshipId = internship._id;
-
-    dispatch();
+    //const internshipId = internship._id;
+    dispatch(apply_for_internship(internship._id));
   };
 
   return (

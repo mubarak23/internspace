@@ -17,11 +17,14 @@ import {
   adminLoginReducer,
 } from "./reducers/adminReducers.js";
 
+import { ApplyInternshipReducer } from "./reducers/appliedInternshipReducers";
+
 import {
   createInternshipReducer,
   internshipsListReducers,
   internshipDetailsReducer,
 } from "./reducers/internshipReducers";
+import { format } from "morgan";
 
 const reducer = combineReducers({
   internshipList: internshipListReducer,
@@ -30,6 +33,8 @@ const reducer = combineReducers({
   adminLogin: adminLoginReducer,
 
   createInternship: createInternshipReducer,
+
+  applyInternship: ApplyInternshipReducer,
 
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
