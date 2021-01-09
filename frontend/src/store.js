@@ -24,7 +24,7 @@ import {
   internshipsListReducers,
   internshipDetailsReducer,
 } from "./reducers/internshipReducers";
-import { format } from "morgan";
+import { internLoginReducer } from "./reducers/internReducers";
 
 const reducer = combineReducers({
   internshipList: internshipListReducer,
@@ -35,6 +35,8 @@ const reducer = combineReducers({
   createInternship: createInternshipReducer,
 
   applyInternship: ApplyInternshipReducer,
+
+  internLogin: internLoginReducer,
 
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,

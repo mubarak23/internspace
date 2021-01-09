@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import FormContainer from "../components/FormContainer";
-import { adminlogin } from "../actions/adminActions";
+import { intern_login } from "../actions/internActions";
 //import { userLoginReducer } from "../reducers/userReducers.js";
 
 const InternLoginScreen = ({ location, history }) => {
@@ -14,20 +14,21 @@ const InternLoginScreen = ({ location, history }) => {
 
   const dispatch = useDispatch();
 
-  const adminLogin = useSelector((state) => state.adminLogin);
-  const { loading, error, adminInfo } = adminLogin;
+  const internLogins = useSelector((state) => state.internLogin);
+  const { loading, error, internInfo } = internLogins;
+  //internLogin
 
   //const redirect = location.search ? location.search.split("=")[1] : "/";
 
   useEffect(() => {
-    if (adminInfo) {
-      history.push("/admin");
+    if (internInfo) {
+      history.push("/");
     }
-  }, [history, adminInfo]);
+  }, [history, internInfo]);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(adminlogin(email, password));
+    dispatch(intern_login(email, password));
   };
 
   return (
