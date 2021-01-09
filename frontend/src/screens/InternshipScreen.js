@@ -26,6 +26,14 @@ const ProductScreen = ({ history, match }) => {
   const adminLogin = useSelector((state) => state.adminLogin);
   const { adminInfo } = adminLogin;
 
+  //applyInternship
+  const apply = useSelector((state) => state.applyInternship);
+  const {
+    loading: applyLoading,
+    error: applyError,
+    appliedInternships,
+  } = apply;
+
   useEffect(() => {
     dispatch(internshipDetails(match.params.id));
   }, [dispatch, match]);
@@ -62,11 +70,17 @@ const ProductScreen = ({ history, match }) => {
             </Col>
 
             <Col md={6}>
-              <form onSubmit={submitHandlerApply}>
-                <Button type="submit" variant="primary">
-                  <h4>Apply For This Internship</h4>
-                </Button>
-              </form>
+              {applyLoading ? (
+                <Loader />
+              ) : applyError ? (
+                <Message variant="danger">{error}</Message>
+              ) : (
+                <form onSubmit={submitHandlerApply}>
+                  <Button type="submit" variant="primary">
+                    <h4>Apply For Internship</h4>
+                  </Button>
+                </form>
+              )}
             </Col>
           </Row>
         </>
