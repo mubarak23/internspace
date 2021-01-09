@@ -17,7 +17,10 @@ import Loader from "../components/Loader";
 import Message from "../components/Message";
 import Meta from "../components/Meta";
 import { internshipDetails } from "../actions/internshipActions";
-import { apply_for_internship } from "../actions/appliedInternshipActions";
+import {
+  apply_for_internship,
+  adminInternshipList,
+} from "../actions/appliedInternshipActions";
 
 const ProductScreen = ({ history, match }) => {
   const dispatch = useDispatch();
@@ -41,7 +44,8 @@ const ProductScreen = ({ history, match }) => {
   const submitHandlerApply = (e) => {
     e.preventDefault();
     //const internshipId = internship._id;
-    dispatch(apply_for_internship(internship._id));
+    console.log(internship._id);
+    dispatch(adminInternshipList(internship._id));
   };
 
   return (
@@ -70,17 +74,11 @@ const ProductScreen = ({ history, match }) => {
             </Col>
 
             <Col md={6}>
-              {applyLoading ? (
-                <Loader />
-              ) : applyError ? (
-                <Message variant="danger">{error}</Message>
-              ) : (
-                <form onSubmit={submitHandlerApply}>
-                  <Button type="submit" variant="primary">
-                    <h4>Apply For Internship</h4>
-                  </Button>
-                </form>
-              )}
+              <form onSubmit={submitHandlerApply}>
+                <Button type="submit" variant="primary">
+                  Apply For Internship
+                </Button>
+              </form>
             </Col>
           </Row>
         </>

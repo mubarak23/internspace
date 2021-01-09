@@ -8,6 +8,7 @@ import { findInternshipById } from "../utils/helpers.js";
 // @access  private -- protect
 const appliedForIntership = asyncHandler(async (req, res) => {
   const internship = await Internship.findById(req.params.id);
+  console.log("we reach this point");
   if (internship) {
     const appliedInternship = await Appliedinternship.create({
       internship: internship._id,
