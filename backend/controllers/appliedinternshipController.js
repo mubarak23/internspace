@@ -7,7 +7,7 @@ import { findInternshipById } from "../utils/helpers.js";
 // @route   POST /api/appliedinternship
 // @access  private -- protect
 const appliedForIntership = asyncHandler(async (req, res) => {
-  const internship = await Internship.findInternshipById(req.params.id);
+  const internship = await Internship.findById(req.params.id);
   if (internship) {
     const appliedInternship = await Appliedinternship.create({
       internship: internship._id,

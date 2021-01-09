@@ -19,7 +19,7 @@ export const apply_for_internship = (id) => async (dispatch, getState) => {
         Authorization: `Bearer ${adminInfo.token}`,
       },
     };
-    const { data } = axios.get(`/api/appliiedInternship/${id}`, config);
+    const { data } = axios.get(`/api/appliedInternship/${id}`, config);
     dispatch({
       type: APPLIED_INTERSHIP_SUCCESS,
       payload: data,
@@ -28,9 +28,9 @@ export const apply_for_internship = (id) => async (dispatch, getState) => {
     dispatch({
       type: APPLIED_INTERSHIP_FAIL,
       payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.response.message,
-    });
+        err.response && err.response.data.message
+          ? err.response.data.message
+          : err.response.message,
+    }); //76649
   }
 };
