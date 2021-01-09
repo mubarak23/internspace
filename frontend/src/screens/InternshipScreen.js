@@ -22,13 +22,18 @@ const ProductScreen = ({ history, match }) => {
   const dispatch = useDispatch();
   const details = useSelector((state) => state.internshipDetails);
   const { loading, error, internship } = details;
+  const adminLogin = useSelector((state) => state.adminLogin);
+  const { adminInfo } = adminLogin;
 
   useEffect(() => {
     dispatch(internshipDetails(match.params.id));
   }, [dispatch, match]);
 
-  const submitHandler = (e) => {
+  const submitHandlerApply = (e) => {
     e.preventDefault();
+    const internId = adminInfo._id;
+    const internshipId = internship._id;
+
     dispatch();
   };
 
@@ -58,7 +63,11 @@ const ProductScreen = ({ history, match }) => {
             </Col>
 
             <Col md={6}>
-              <h3>Apply For This Internship</h3>
+              <form onSubmit={submitHandlerApply}>
+                <Button type="submit" variant="primary">
+                  <h4>Apply For This Internship</h4>
+                </Button>
+              </form>
             </Col>
           </Row>
         </>
