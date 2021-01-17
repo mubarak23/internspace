@@ -14,7 +14,7 @@ const appliedForIntership = asyncHandler(async (req, res) => {
       internship: internship._id,
       intern: req.intern._id,
       title: internship.title,
-      applied_date: "12-26-2020",
+      applied_date: new Date().toISOString().slice(0, 10),
     });
     if (appliedInternship) {
       res.status(201).json(appliedInternship);
@@ -28,4 +28,20 @@ const appliedForIntership = asyncHandler(async (req, res) => {
   }
 });
 
-export { appliedForIntership };
+// @desc    apply for internship
+// @route   POST /api/appliedinternship
+// @access  private -- protect
+
+const listofappliedInternship = asyncHandler(async (req, res) => {
+  const appliedinternshiplists = await Appliedinternship.find({
+    intern: req.intern._id,
+  });
+  if (appliedinternshiplists) {
+    res.status(200).json(appliedinternshiplists);
+  } else {
+    res.status(400);
+    throw new Error("invalid request");
+  }
+});
+
+export { appliedForIntership, listofappliedInternship };
