@@ -16,7 +16,7 @@ export const apply_for_internship = (id) => async (dispatch, getState) => {
     const {
       internLogin: { internInfo },
     } = getState();
-
+    console.log(internInfo);
     const config = {
       headers: {
         Authorization: `Bearer ${internInfo.token}`,
@@ -28,18 +28,7 @@ export const apply_for_internship = (id) => async (dispatch, getState) => {
       payload: data,
     });
   } catch (error) {
-    const {
-      internLogin: { internInfo },
-    } = getState();
-
-    const config = {
-      headers: {
-        Authorization: `Bearer ${internInfo.token}`,
-      },
-    };
-    const { data } = await axios.get(`/api/appliedInternship/${id}`, config);
-    console.log("error");
-    console.log(data);
+    console.log(error);
   }
 };
 
