@@ -22,7 +22,7 @@ const InternLoginScreen = ({ location, history }) => {
 
   useEffect(() => {
     if (internInfo) {
-      history.push("/");
+      history.push("/intern");
     }
   }, [history, internInfo]);
 

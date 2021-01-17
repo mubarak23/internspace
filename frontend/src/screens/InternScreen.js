@@ -3,25 +3,27 @@ import { Table, Form, Button, Row, Col } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { adminInternshipList } from "../actions/adminActions";
+import { appliedInternshipList } from "../actions/appliedInternshipActions";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 
-const AdminScreen = ({ history }) => {
+const InternScreen = ({ history }) => {
   const dispatch = useDispatch();
-  const adminLogin = useSelector((state) => state.adminLogin);
-  const { adminInfo } = adminLogin;
-  const internshipsList = useSelector((state) => state.internshipList);
-  const { loading, error, internships } = internshipsList;
-  console.log(internships);
-  console.log(adminInfo);
+  const internLogin = useSelector((state) => state.internLogin);
+  const { internInfo } = internLogin;
+  const applliiedinternshipsLists = useSelector(
+    (state) => state.appliedinternshipList
+  );
+  const { loading, error, appliedinternships } = applliiedinternshipsLists;
+  console.log(appliedinternships);
+  console.log(internInfo);
   useEffect(() => {
-    if (!adminInfo.isCompany) {
+    if (!internInfo) {
       history.push("/login");
     } else {
-      dispatch(adminInternshipList());
+      dispatch(appliedInternshipList());
     }
-  }, [dispatch, history, adminInfo]);
+  }, [dispatch, history, internInfo]);
   return (
     <Row>
       <Col md={3}>
@@ -46,7 +48,7 @@ const AdminScreen = ({ history }) => {
         </div>
       </Col>
       <Col md="9">
-        <h4>Latest Internship Available</h4>
+        <h4>Applied Internship </h4>
         {loading ? (
           <Loader />
         ) : error ? (
@@ -57,26 +59,21 @@ const AdminScreen = ({ history }) => {
               <tr>
                 <th>ID</th>
                 <th>Title</th>
-                <th>Applied</th>
-                <th>Published By</th>
-                <th>Action</th>
+                <th>Status</th>
+                <th>Details</th>
+                <th>Applied Date</th>
               </tr>
             </thead>
             <tbody>
-              {internships.map((internship) => (
-                <tr key={internship._id}>
-                  <td>{internship._id}</td>
-                  <td>{internship.title}</td>
-                  <td>34</td>
-                  <td>{adminInfo.name}</td>
+              {appliedinternships.map((applied) => (
+                <tr key={applied._id}>
+                  <td>{applied._id}</td>
+                  <td>{applied.title}</td>
+                  <td>{applied.status}</td>
                   <td>
-                    <Link to={`/orders/3y4y5`}>Upadte Status</Link>{" "}
-                    <LinkContainer to={`/admin/user/4y5ye/edit`}>
-                      <Button variant="light" className="btn-sm">
-                        <i className="fas fa-edit"></i>
-                      </Button>
-                    </LinkContainer>
+                    <Link to={`/internship/${applied.internship}`}>View</Link>{" "}
                   </td>
+                  <td>{applied.applied_date}</td>
                 </tr>
               ))}
             </tbody>
@@ -87,4 +84,4 @@ const AdminScreen = ({ history }) => {
   );
 };
 
-export default AdminScreen;
+export default InternScreen;

@@ -17,10 +17,7 @@ import Loader from "../components/Loader";
 import Message from "../components/Message";
 import Meta from "../components/Meta";
 import { internshipDetails } from "../actions/internshipActions";
-import {
-  apply_for_internship,
-  adminInternshipList,
-} from "../actions/appliedInternshipActions";
+import { apply_for_internship } from "../actions/appliedInternshipActions";
 
 const ProductScreen = ({ history, match }) => {
   const dispatch = useDispatch();
@@ -45,7 +42,7 @@ const ProductScreen = ({ history, match }) => {
     e.preventDefault();
     //const internshipId = internship._id;
     console.log(internship._id);
-    dispatch(adminInternshipList(internship._id));
+    dispatch(apply_for_internship(internship._id));
   };
 
   return (
